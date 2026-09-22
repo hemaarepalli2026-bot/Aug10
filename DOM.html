@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.5;
+            padding: 20px;
+        }
+        header {
+            background: #282c34;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .action-button {
+            padding: 10px 20px;
+            margin: 10px 5px;
+            cursor: pointer;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        .action-button:hover { background: #0056b3; }
+        .display-area {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            text-align: center;
+            min-height: 150px;
+        }
+        .image-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .image-container img {
+            width: 150px;
+            height: 180px;
+            object-fit: cover;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        .animated-box {
+            width: 100px;
+            height: 100px;
+            background: lightgreen;
+            animation: pulse 1.5s infinite;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>DOM Manipulation Demo</h1>
+        <p>Visitor Count: <span id="visitorCount">0</span></p>
+    </header>
+
+    <section>
+        <h2>Dynamic Content Display</h2>
+        <button class="action-button" onclick="displayType('Text')">Show Text</button>
+        <button class="action-button" onclick="displayType('Image')">Show Image</button>
+        <button class="action-button" onclick="displayType('Animation')">Show Animation</button>
+        <div id="displayArea" class="display-area"></div>
+    </section>
+
+    <section>
+        <h2>Image Toggle</h2>
+        <div class="image-container">
+            <img class="toggle-img" src="https://www.kluniversity.in/fphotos/actual/7633.jpg" alt="Faculty 1">
+            <img class="toggle-img" src="https://www.kluniversity.in/fphotos/actual/6655.jpg" alt="Faculty 2">
+            <img class="toggle-img" src="https://www.kluniversity.in/fphotos/actual/4592.jpg" alt="Faculty 3">
+        </div>
+        <button class="action-button" id="toggleImageButton">Toggle Image</button>
+    </section>
+
+    <script>
+        document.getElementById('visitorCount').textContent = "1";
+
+        function displayType(type) {
+            const displayArea = document.getElementById('displayArea');
+            if (type === 'Text') {
+                displayArea.innerHTML = '<p>Hello All.. This is Java Full Stack Class...!!!</p>';
+            } else if (type === 'Image') {
+                displayArea.innerHTML = '<img src="https://www.kluniversity.in/fphotos/actual/7633.jpg" alt="Faculty" style="width:150px; height:180px; object-fit:cover;">';
+            } else if (type === 'Animation') {
+                displayArea.innerHTML = '<div class="animated-box"></div>';
+            }
+        }
+
+        const toggleButton = document.getElementById('toggleImageButton');
+        const images = document.querySelectorAll('.toggle-img');
+
+        toggleButton.addEventListener('click', () => {
+            images.forEach(img => {
+                img.style.display = (img.style.display === 'none') ? 'block' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
